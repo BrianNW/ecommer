@@ -20,6 +20,7 @@ model Product {
   isAvailableForPurchase  Boolean     @default(true)
   createdAt               DateTime    @default(now())
   updatedAt               DateTime    @updatedAt
+  orders Order[]
 }
 
 model User {
@@ -40,4 +41,10 @@ model Order {
   productID String
   userId  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
   product Product @relation(fields: [productId], references: [id], onDelete: Restrict)
+}
+
+model DownloadVerification {
+  id        String      @id @default(uuid())
+  expiresAt DateTime
+  createdAt DateTime    @default(now())
 }
